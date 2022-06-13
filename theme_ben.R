@@ -1,16 +1,21 @@
 library(paletteer)
-
-theme_ben <- function () {
-  theme_minimal(base_size=12, base_family="Microsoft Sans Serif") %+replace% 
-    theme(
-      panel.grid.minor = element_blank(),
-      plot.background = element_rect(fill = #FFFFFF, color = #FFFFFF)
-      ))
-}
-
-
 library(datasets)
 library(tidyverse)
+
+my_colors <- c("#4477AA", "#88CCEE", "#117733", 
+               "#DDCC77", "#CC6677", "#AA4499",
+               "#332288", "#999933", "#661100", 
+               "#CC6677", "#AA4466", "#882255")
+
+theme_ben <- function () {
+  theme_minimal(base_size=12, base_family="SF Mono") %+replace% 
+    theme(
+      axis.ticks = element_blank(),
+      panel.grid.minor = element_blank()
+      )}
+
+
+
 ggplot(chickwts) +
   geom_bar(aes(x = feed, y = weight, fill = feed), 
            position = "dodge", stat = "summary", fun.y = "mean") +
@@ -22,6 +27,5 @@ ggplot(chickwts) +
     subtitle = "What's the unit of measure? Who knows!",
     caption = "From the chickwts dataset"
   ) +
-  scale_fill_manual(values = c("#2B4162", "#C5CBD4", "#385F71", 
-                               "#D7B377", "#F5F0F6", "#8F754F")) +
+  scale_fill_manual(values = my_colors ) +
   theme_ben()
